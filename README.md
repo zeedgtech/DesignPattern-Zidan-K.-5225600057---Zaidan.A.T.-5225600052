@@ -1,4 +1,5 @@
-# balatroProject8# Refleksi Task 1 - Balatro-Like Run Loop
+balatroProject-8
+Refleksi Task 1 - Balatro-Like Run Loop
 
 1. **Apa yang jadi bagian tetap (invariant) di program?**
 Bagian yang tidak boleh berubah itu alur utama permainan yang ada di dalam class `RunSession`. Urutan 3 ronde sama 6 fase di dalamnya (mulai dari bikin input, hitung skor, hitung reward, update duit, mampir shop, sampe lanjut ronde) sudah dipatok mati dan tidak boleh diubah-ubah posisinya.
