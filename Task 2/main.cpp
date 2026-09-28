@@ -2,12 +2,14 @@
 
 using namespace std;
 
+
 class Player {
 public:
     void PlayerAction() {
         cout << "1. Player inputs movement / action.\n";
     }
 };
+
 
 class GameSystem {
 public:
@@ -16,6 +18,7 @@ public:
         cout << "3. Reward, damage, or score is calculated.\n";
     }
 };
+
 
 class GameState {
 private:
@@ -37,6 +40,21 @@ public:
 
     bool IsGameOver() const {
         return gameOver;
+    }
+};
+
+
+class GameSession {
+private:
+    Player player;
+    GameSystem system;
+    GameState state;
+
+public:
+    void StartGame() {
+        cout << "=== Game Session Started ===\n";
+        
+        cout << "=== Game Session Ended ===\n";
     }
 };
 
