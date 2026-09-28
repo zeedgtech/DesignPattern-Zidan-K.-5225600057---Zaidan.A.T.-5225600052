@@ -2,14 +2,12 @@
 
 using namespace std;
 
-
 class Player {
 public:
     void PlayerAction() {
         cout << "1. Player inputs movement / action.\n";
     }
 };
-
 
 class GameSystem {
 public:
@@ -19,13 +17,24 @@ public:
     }
 };
 
-
 class GameState {
 private:
     bool gameOver = false;
     int frameCount = 0;
 
 public:
+    void UpdateState() {
+        cout << "4. Game state updates (Positions, HP, Score).\n";
+        frameCount++;
+        
+        if (frameCount >= 3) {
+            gameOver = true;
+            cout << "5. Win/Lose condition met. Ending session.\n";
+        } else {
+            cout << "5. Check win/lose condition: Continuing loop...\n";
+        }
+    }
+
     bool IsGameOver() const {
         return gameOver;
     }
