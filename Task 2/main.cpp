@@ -9,6 +9,14 @@ public:
     }
 };
 
+class GameSystem {
+public:
+    void ResolveSystem() {
+        cout << "2. System evaluates collisions and actions.\n";
+        cout << "3. Reward, damage, or score is calculated.\n";
+    }
+};
+
 int main() {
     cout << "=== Game Session Started ===\n";
     
