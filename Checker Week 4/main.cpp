@@ -24,3 +24,14 @@ protected:
     PokerHandChecker* nextChecker = nullptr;
 };
 
+class FullHouseChecker : public PokerHandChecker {
+public:
+    HandRank check(const Hand& hand) override {
+        if (hand.value == 7) {
+            std::cout << "Detected FULL HOUSE\n";
+            return HandRank::FULL_HOUSE;
+        }
+        if (nextChecker) return nextChecker->check(hand);
+        return HandRank::HIGH_CARD;
+    }
+};
