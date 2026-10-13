@@ -48,6 +48,7 @@ public:
     }
 };
 
+
 class StraightChecker : public PokerHandChecker {
 public:
     HandRank check(const Hand& hand) override {
@@ -59,3 +60,16 @@ public:
         return HandRank::HIGH_CARD;
     }
 };
+
+class PairChecker : public PokerHandChecker {
+public:
+    HandRank check(const Hand& hand) override {
+        if (hand.value == 2) {
+            std::cout << "Detected PAIR\n";
+            return HandRank::PAIR;
+        }
+        if (nextChecker) return nextChecker->check(hand);
+        return HandRank::HIGH_CARD;
+    }
+};
+
