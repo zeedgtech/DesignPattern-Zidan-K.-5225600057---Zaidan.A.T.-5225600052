@@ -90,3 +90,36 @@ public:
     }
 };
 
+class ScoringRule {
+private:
+    FullHouseChecker fullHouseChecker;
+    FlushChecker flushChecker;
+    StraightChecker straightChecker;
+    PairChecker pairChecker;
+
+    int convertRankToScore(HandRank rank) {
+        switch (rank) {
+            case HandRank::FULL_HOUSE: return 25;
+            case HandRank::FLUSH: return 20;
+            case HandRank::STRAIGHT: return 15;
+            case HandRank::PAIR: return 10;
+            case HandRank::HIGH_CARD:
+            default: return 5;
+        }
+    }
+
+public:
+    ScoringRule() {
+        fullHouseChecker.setNext(&flushChecker);
+        flushChecker.setNext(&straightChecker);
+        straightChecker.setNext(&pairChecker);
+    }
+
+    int scoreHand(const Hand& hand) {
+        std::cout << "Calculating hand score...\n";
+        HandRank rank = fullHouseChecker.check(hand);
+        int score = convertRankToScore(rank);
+        std::cout << "Final score = " << score << "\n";
+        return score;
+    }
+};
