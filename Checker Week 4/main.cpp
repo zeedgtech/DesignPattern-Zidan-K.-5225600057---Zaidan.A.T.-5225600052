@@ -73,3 +73,12 @@ public:
     }
 };
 
+class HandGenerator {
+public:
+    Hand generateHand() {
+        std::cout << "Generating cards for player...\n";
+        Hand hand;
+        hand.value = 5;
+        return hand;
+    }
+};
