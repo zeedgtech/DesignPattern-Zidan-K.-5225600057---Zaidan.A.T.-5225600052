@@ -52,9 +52,9 @@ class ModifiedRewardRule : public IRewardRule {
 public:
     int computeReward(int baseScore, int round) override {
         if (round % 2 == 0) {
-            return baseScore * 2;
+            return baseScore * 2; 
         }
-        return baseScore + 2;
+        return baseScore + 2;     
     }
 };
 
@@ -106,7 +106,7 @@ public:
         std::cout << "Final money: " << money << "\n";
     }
 };
-// udah nut cek
+
 int main() {
     std::srand(static_cast<unsigned int>(std::time(nullptr)));
 
@@ -115,6 +115,7 @@ int main() {
     auto rewardRule = std::make_shared<ModifiedRewardRule>();
 
     RunSession session(inputGen, scoringRule, rewardRule);
+    
     session.startRun();
 
     return 0;
