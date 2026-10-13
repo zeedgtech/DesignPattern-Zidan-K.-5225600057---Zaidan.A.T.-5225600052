@@ -35,3 +35,15 @@ public:
         return HandRank::HIGH_CARD;
     }
 };
+
+class FlushChecker : public PokerHandChecker {
+public:
+    HandRank check(const Hand& hand) override {
+        if (hand.value == 6) {
+            std::cout << "Detected FLUSH\n";
+            return HandRank::FLUSH;
+        }
+        if (nextChecker) return nextChecker->check(hand);
+        return HandRank::HIGH_CARD;
+    }
+};
