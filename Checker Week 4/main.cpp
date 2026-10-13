@@ -9,3 +9,7 @@ enum class HandRank {
     FLUSH,
     FULL_HOUSE
 };
+
+struct Hand {
+    int value = 0;
+};
