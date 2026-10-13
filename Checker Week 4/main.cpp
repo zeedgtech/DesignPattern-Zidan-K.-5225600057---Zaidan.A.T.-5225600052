@@ -47,3 +47,15 @@ public:
         return HandRank::HIGH_CARD;
     }
 };
+
+class StraightChecker : public PokerHandChecker {
+public:
+    HandRank check(const Hand& hand) override {
+        if (hand.value == 5) {
+            std::cout << "Detected STRAIGHT\n";
+            return HandRank::STRAIGHT;
+        }
+        if (nextChecker) return nextChecker->check(hand);
+        return HandRank::HIGH_CARD;
+    }
+};
