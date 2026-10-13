@@ -82,3 +82,11 @@ public:
         return hand;
     }
 };
+
+class HandPlayer {
+public:
+    void playHand() {
+        std::cout << "Player selects cards to play...\n";
+    }
+};
+
