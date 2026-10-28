@@ -77,3 +77,37 @@ public:
     }
 };
 
+class PairChecker : public PokerHandChecker {
+public:
+    HandRank check(const std::vector<Card>& cards) override {
+        for (size_t i = 0; i < cards.size(); ++i) {
+            for (size_t j = i + 1; j < cards.size(); ++j) {
+                if (cards[i].rank == cards[j].rank) {
+                    std::cout << "Detected PAIR\n";
+                    return HandRank::PAIR;
+                }
+            }
+        }
+        return checkNext(cards);
+    }
+};
+
+class HandGenerator {
+public:
+    Hand generateHand() {
+        std::cout << "Generating random cards for player...\n";
+        Hand hand;
+        
+        std::mt19937 rng(static_cast<unsigned int>(std::time(nullptr)));
+        std::uniform_int_distribution<int> rankDist(2, 14);
+        const char suits[] = {'H', 'D', 'C', 'S'};
+        std::uniform_int_distribution<int> suitDist(0, 3);
+
+        for (int i = 0; i < 5; ++i) {
+            hand.cards.push_back({rankDist(rng), suits[suitDist(rng)]});
+            std::cout << "Card [" << i << "]: Rank " << hand.cards.back().rank 
+                      << ", Suit " << hand.cards.back().suit << "\n";
+        }
+        return hand;
+    }
+};
