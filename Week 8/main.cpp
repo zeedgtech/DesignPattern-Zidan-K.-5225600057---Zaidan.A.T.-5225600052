@@ -173,3 +173,32 @@ public:
         return 0;
     }
 };
+
+class GameManager {
+private:
+    HandGenerator handGenerator;
+    HandPlayer handPlayer;
+    ScoringRule scoringRule;
+    BlindRule blindRule;
+    RewardRule rewardRule;
+
+public:
+    void runSession() {
+        std::cout << "=== Run Started ===\n";
+        
+        Hand hand = handGenerator.generateHand();
+        std::vector<Card> playedCards = handPlayer.playHand(hand);
+        int score = scoringRule.scoreHand(playedCards);
+        bool win = blindRule.checkBlind(score);
+        int reward = rewardRule.earnMoney(win, score);
+        
+        std::cout << "Money gained: $" << reward << "\n";
+        std::cout << "=== Run Ended ===\n";
+    }
+};
+
+int main() {
+    GameManager gameManager;
+    gameManager.runSession();
+    return 0;
+}
