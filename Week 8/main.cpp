@@ -38,3 +38,42 @@ public:
         return selectedCards;
     }
 };
+
+class PokerHandChecker {
+protected:
+    PokerHandChecker* nextChecker = nullptr;
+public:
+    virtual ~PokerHandChecker() = default;
+    virtual HandRank check(const std::vector<Card>& cards) = 0;
+    
+    void setNext(PokerHandChecker* next) {
+        nextChecker = next;
+    }
+    
+    HandRank checkNext(const std::vector<Card>& cards) {
+        if (nextChecker) return nextChecker->check(cards);
+        return HandRank::HIGH_CARD;
+    }
+};
+
+class FlushChecker : public PokerHandChecker {
+public:
+    HandRank check(const std::vector<Card>& cards) override {
+        if (cards.size() >= 5) {
+            char firstSuit = cards[0].suit;
+            bool isFlush = true;
+            for (const auto& card : cards) {
+                if (card.suit != firstSuit) {
+                    isFlush = false;
+                    break;
+                }
+            }
+            if (isFlush) {
+                std::cout << "Detected FLUSH\n";
+                return HandRank::FLUSH;
+            }
+        }
+        return checkNext(cards);
+    }
+};
+
