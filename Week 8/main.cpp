@@ -111,3 +111,65 @@ public:
         return hand;
     }
 };
+
+class HandPlayer {
+private:
+    ChosenHand chosenHand;
+public:
+    std::vector<Card> playHand(const Hand& mainHand) {
+        std::cout << "Player selects cards to play...\n";
+        std::vector<int> selectedIndices = {0, 1, 2, 3, 4}; 
+        chosenHand.selectCards(mainHand, selectedIndices);
+        return chosenHand.getSelectedCards();
+    }
+};
+
+class ScoringRule {
+private:
+    FlushChecker flushChecker;
+    PairChecker pairChecker;
+
+    int convertRankToScore(HandRank rank) {
+        switch (rank) {
+            case HandRank::FLUSH: return 20;
+            case HandRank::PAIR: return 10;
+            case HandRank::HIGH_CARD:
+            default: return 5;
+        }
+    }
+
+public:
+    ScoringRule() {
+        flushChecker.setNext(&pairChecker);
+    }
+
+    int scoreHand(const std::vector<Card>& playedCards) {
+        std::cout << "Calculating hand score...\n";
+        HandRank rank = flushChecker.check(playedCards);
+        int score = convertRankToScore(rank);
+        std::cout << "Final score = " << score << "\n";
+        return score;
+    }
+};
+
+class BlindRule {
+public:
+    bool checkBlind(int score) {
+        std::cout << "Checking blind requirement (Min 10)...\n";
+        if (score >= 10) {
+            std::cout << "Result: WIN\n";
+            return true;
+        }
+        std::cout << "Result: LOSE\n";
+        return false;
+    }
+};
+
+class RewardRule {
+public:
+    int earnMoney(bool win, int score) {
+        std::cout << "Calculating reward...\n";
+        if (win) return score;
+        return 0;
+    }
+};
