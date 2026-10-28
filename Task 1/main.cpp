@@ -26,7 +26,6 @@
         virtual int computeReward(int baseScore, int round) = 0;
     };
 
-<<<<<<< Updated upstream
 class SimpleInputGenerator : public IInputGenerator {
 public:
     TurnInput generateInput(int round) override {
@@ -58,14 +57,12 @@ public:
         return baseScore + 2;     
     }
 };
-=======
     class SimpleInputGenerator : public IInputGenerator {
     public:
         TurnInput generateInput(int round) override {
             return { round + 2 };
         }
     };
->>>>>>> Stashed changes
 
     class RandomInputGenerator : public IInputGenerator {
     public:
@@ -75,7 +72,6 @@ public:
         }
     };
 
-<<<<<<< Updated upstream
         std::cout << "=== RUN END ===\n";
         std::cout << "Final money: " << money << "\n";
     }
@@ -83,14 +79,12 @@ public:
 
 int main() {
     std::srand(static_cast<unsigned int>(std::time(nullptr)));
-=======
     class StandardScoringRule : public IScoringRule {
     public:
         int computeScore(const TurnInput& input) override {
             return input.value;
         }
     };
->>>>>>> Stashed changes
 
     class ModifiedRewardRule : public IRewardRule {
     public:
@@ -102,11 +96,9 @@ int main() {
         }
     };
 
-<<<<<<< Updated upstream
     RunSession session(inputGen, scoringRule, rewardRule);
     
     session.startRun();
-=======
     class ShopSystem {
     public:
         void processShop() {
@@ -114,7 +106,6 @@ int main() {
             std::cout << "[SHOP] skipped.\n";
         }
     };
->>>>>>> Stashed changes
 
     class RunSession {
     private:
